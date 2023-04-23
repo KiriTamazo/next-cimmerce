@@ -1,3 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .btn {
+    @apply px-4 py-2;
+  }
+  .nav-links {
+    @apply px-3 py-2 text-center text-gray-700 bg-white shadow-sm border flex items-center border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300;
+  }
+  .icon {
+    @apply w-5 h-5 text-gray-400;
+  }
+  .input-number {
+    @apply w-full appearance-none bg-gray-100 border rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400;
+  }
+  .input-number::-webkit-outer-spin-button,
+  .input-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+.star-ratings {
+  display: flex !important;
+  align-items: center !important;
+}

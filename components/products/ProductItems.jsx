@@ -1,74 +1,68 @@
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import Button from "../Button";
 const StarRatings = dynamic(() => import("react-star-ratings"), { ssr: false });
-
-// 0 32px 32px rgb(31 47 70 / 12%)
 
 const ProductItems = ({ product }) => {
   return (
-    <article className="border border-gray-200 overflow-hidden bg-white drop-shadow-sm shadow-sm rounded mb-5">
-      <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/4 flex p-3">
-          <div className="w-[80%] h-[70%] relative">
-            <Image
-              src={
-                product.images && product.images[0]
-                  ? product.images[0].url
-                  : "/images/default_product.png"
-              }
-              alt="product anme"
-              height="240"
-              width="240"
-            />
-          </div>
-        </div>
-        <div className="md:w-2/4">
-          <div className="p-4">
-            <Link
-              href={`/product/${product._id}`}
-              className="hover:text-blue-600"
-            >
-              {product.name}
-            </Link>
-            <div className="flex flex-wrap items-center space-x-2 mb-2">
-              <div className="ratings">
-                <div className="my-1">
-                  <StarRatings
-                    id={product.id}
-                    rating={product?.ratings}
-                    starRatedColor="#ffb829"
-                    numberOfStars={5}
-                    starDimension="18px"
-                    starSpacing="1px"
-                    name="rating"
-                  />
-                </div>
-              </div>
-              <b className="text-gray-300">•</b>
-              <span className="ml-1 text-yellow-500">{product?.ratings}</span>
-            </div>
-            <p className="text-gray-500 mb-2">
-              {product?.description?.substring(0, 150)}...
-            </p>
-          </div>
-        </div>
-        <div className="md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200">
-          <div className="p-5">
-            <span className="text-xl font-semibold text-black">
-              ${product?.price}
-            </span>
-
-            <p className="text-green-500">Free Shipping</p>
-            <div className="my-3">
-              <a className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer">
-                Add to Cart
-              </a>
-            </div>
-          </div>
+    <div className="group cursor-pointer  sm:max-w-[400px] h-fit rounded-lg ">
+      <div className="relative">
+        <Image
+          src={
+            product.images && product.images[0]
+              ? product.images[0].url
+              : "/images/default_product.png"
+          }
+          alt="product anme"
+          width={240}
+          height={480}
+          className="rounded-lg object-cover"
+          style={{ width: "100%", height: "100%", minHeight: "400px" }}
+        />
+        <div className="absolute rounded-lg opacity-0 transition  duration-500 ease-in-out w-full h-full bottom-0 flex items-end px-4 group-hover:opacity-100">
+          <Button
+            color="primary"
+            icon={<ShoppingBagIcon className="w-5 h-5 " />}
+            title="Add To Cart"
+            style="group-hover:-translate-y-8    transition duration-500 ease-in-out"
+          />
         </div>
       </div>
-    </article>
+      <div className=" rounded-bl-md flex gap-2   rounded-br-md justify-between  py-4 ">
+        <div className="flex   flex-col ">
+          <Link
+            href={`/product/${product._id}`}
+            className="text-sm hover:text-indigo-500 transition duration-300 ease-in-out text-slate-900 font-medium"
+          >
+            {product.name}
+          </Link>
+          <div className="flex flex-wrap ">
+            <div className="ratings">
+              <div className="my-1 flex items-center gap-1">
+                <StarRatings
+                  id={product.id}
+                  rating={product?.ratings}
+                  starRatedColor="#ffb829"
+                  numberOfStars={5}
+                  starDimension="18px"
+                  starSpacing="1px"
+                  name="rating"
+                />
+                <b className="text-gray-300">•</b>
+                <span className="ml-1 text-yellow-500">{product?.ratings}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p className="text-lg font-semibold text-slate-900/70 block">
+            ${product?.price}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 export default ProductItems;
