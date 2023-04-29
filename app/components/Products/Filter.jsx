@@ -1,5 +1,6 @@
-import dynamic from "next/dynamic";
-const StarRatings = dynamic(() => import("react-star-ratings"), { ssr: false });
+"use client";
+import NoSsr from "@/ulti/NoSsr";
+import { Rating } from "react-simple-star-rating";
 
 const Filters = () => {
   let queryParams;
@@ -36,26 +37,28 @@ const Filters = () => {
   return (
     <aside className="md:w-1/3 lg:w-1/4 px-4">
       <a
-        className="md:hidden mb-5  w-full text-center px-4 py-2 inline-block text-lg text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-600"
+        className="md:hidden mb-5  w-full text-center px-4 py-2 inline-block text-lg text-gray-700 bg-white shadow-sm  rounded-md hover:bg-gray-100 hover:text-blue-600"
         href="#"
       >
         Filter by
       </a>
-      <div className="hidden mb-4 md:block px-6 py-4 border border-gray-200 bg-white rounded shadow-sm">
+      <div className="hidden mb-4 md:block px-6 py-4  bg-white rounded shadow-sm">
         <h3 className="font-semibold mb-2">Price ($)</h3>
         <div className="grid md:grid-cols-3 gap-x-2">
           <div className="mb-4">
             <input
               name="min"
-              className=":[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+              className=":[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  border  bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
               type="number"
               placeholder="Min"
+              min={0}
             />
           </div>
           <div className="mb-4">
             <input
               name="max"
-              className=":[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+              min={0}
+              className=":[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  border  bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
               type="number"
               placeholder="Max"
             />
@@ -67,7 +70,7 @@ const Filters = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block px-6 py-4 border border-gray-200 bg-white rounded shadow-sm">
+      <div className="hidden md:block px-6 py-4 bg-white rounded shadow-sm">
         <h3 className="font-semibold mb-2">Category</h3>
         <ul className="space-y-1">
           <Checkbox name="category" value="Electronics" label="Electronics" />
@@ -85,15 +88,19 @@ const Filters = () => {
               name="ratings"
               value={`${rating}`}
               label={
-                <span className="ml-2 text-gray-500">
-                  <StarRatings
-                    rating={rating}
-                    starRatedColor="#ffb829"
-                    numberOfStars={5}
-                    starDimension="20px"
-                    starSpacing="2px"
-                    name="rating"
-                  />
+                <span className=" text-gray-500">
+                  <NoSsr>
+                    <Rating
+                      size={30}
+                      className="m-0"
+                      emptyStyle={{ display: "flex" }}
+                      fillStyle={{ display: "-webkit-inline-box" }}
+                      transition
+                      initialValue={rating}
+                      allowHover={false}
+                      readonly
+                    />
+                  </NoSsr>
                 </span>
               }
             />

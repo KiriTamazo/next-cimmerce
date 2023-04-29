@@ -12,20 +12,20 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter a product price"],
   },
-  imgaes: [{ public_id: { type: String }, url: { type: String } }],
+  images: [{ public_id: { type: String }, url: { type: String } }],
   category: {
     type: String,
-    required: [true, "Please enter a product category"],
+    required: [true, "Please enter product category"],
     enum: {
       values: [
-        "Electronic",
-        "Camera",
+        "Electronics",
+        "Cameras",
         "Laptops",
         "Accessories",
         "Headphones",
         "Sports",
       ],
-      message: "Please select  product category",
+      message: "Please select a valid category",
     },
   },
   seller: {

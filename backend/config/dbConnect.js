@@ -5,7 +5,7 @@ const dbConnect = () => {
     return;
   }
   mongoose.set("strictQuery", false);
-  mongoose.connect(process.env.DB_URL);
+  mongoose.connect(process.env.MONGODB_URL);
 };
 
 export default dbConnect;

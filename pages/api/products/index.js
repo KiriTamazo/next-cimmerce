@@ -1,11 +1,13 @@
-import dbConnect from "@/backend/config/dbConnect";
+import nc from "next-connect";
 import {
   createProduct,
+  getProduct,
   getProducts,
 } from "@/backend/controller/product.controller";
-import nc from "next-connect";
+import dbConnect from "@/backend/config/dbConnect";
 
 const handler = nc();
+
 dbConnect();
 
 handler.get(getProducts);

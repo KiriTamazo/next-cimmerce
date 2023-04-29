@@ -1,14 +1,13 @@
-import ProductsList from "@/components/products/ProductsList";
 import axios from "axios";
+import ProductsList from "./products/page";
+import ProgressBar from "./components/Navbar/ProgressBar";
 
-const getProducts = async () => {
-  const { data } = await axios.get(`${process.env.API_URL}/api/products`);
-  return data;
-};
- 
 const Home = async () => {
-  const productsData = await getProducts();
-
-  return <ProductsList data={productsData} />;
+  return (
+    <>
+      <ProgressBar />
+      <ProductsList />
+    </>
+  );
 };
 export default Home;
