@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
       <body>
         <ProgressBar />
         <Navbar />
+
         {children}
       </body>
     </html>

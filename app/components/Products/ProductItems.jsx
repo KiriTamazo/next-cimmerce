@@ -10,7 +10,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 const ProductItems = ({ product }) => {
   return (
     <div className="group cursor-pointer  sm:max-w-[400px] h-fit rounded-lg ">
-      <div className="relative">
+      <div className="relative bg-slate-200">
         <Image
           src={
             product.images && product.images[0]
@@ -20,8 +20,12 @@ const ProductItems = ({ product }) => {
           alt="product anme"
           width={240}
           height={480}
-          className="rounded-lg object-contain"
-          style={{ width: "100%", height: "100%", minHeight: "400px" }}
+          className="object-cover w-full rounded transition-all duration-300 ease-in-out aspect-square group-hover:scale-105 "
+          style={{
+            width: "100%",
+            height: "100%",
+            minHeight: "380px",
+          }}
           loading="lazy"
         />
         <div className="absolute rounded-lg opacity-0 transition  duration-500 ease-in-out w-full h-full bottom-0 flex items-end px-4 group-hover:opacity-100">
@@ -31,15 +35,15 @@ const ProductItems = ({ product }) => {
               <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5 " />
             }
             title="Add To Cart"
-            style="group-hover:-translate-y-8    transition duration-500 ease-in-out"
+            style="group-hover:-translate-y-8 transition duration-500 ease-in-out"
           />
         </div>
       </div>
-      <div className=" rounded-bl-md flex gap-2   rounded-br-md justify-between  py-4 ">
+      <div className=" rounded-bl-md flex gap-2 rounded-br-md justify-between  py-4 ">
         <div className="flex   flex-col ">
           <Link
             href={`/products/${product.id}`}
-            className="text-sm hover:text-indigo-500 transition duration-300 ease-in-out text-slate-900 font-medium"
+            className="text-sm hover:text-indigo-500 transition duration-300 ease-in-out text-slate-700 font-medium"
           >
             {product.name}
           </Link>

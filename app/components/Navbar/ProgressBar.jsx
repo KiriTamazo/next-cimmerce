@@ -8,7 +8,6 @@ function Loading() {
   const [loading, setLoading] = useState(false);
   const searchParama = useSearchParams();
   const pathName = usePathname();
-  console.log("bar", loading, searchParama.toString(), pathName, router);
   useEffect(() => {
     const handleStart = () => setLoading(true);
     const handleComplete = () => setLoading(false);

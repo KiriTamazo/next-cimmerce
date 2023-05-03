@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter a product description"],
   },
   price: {
-    type: String,
+    type: Number,
     required: [true, "Please enter a product price"],
   },
   images: [{ public_id: { type: String }, url: { type: String } }],
