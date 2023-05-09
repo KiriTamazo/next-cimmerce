@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProductsDetails } from "@/ulti/getProduct";
 import BreadCrumbs from "@/app/components/BreadCrumbs";
+import PageDetailLoading from "./loading";
 const AsideProduct = dynamic(() =>
   import("@/app/components/Products/AsideProduct")
 );
@@ -11,6 +12,7 @@ const MainProducts = dynamic(() =>
 );
 export async function generateMetadata({ params }) {
   const product = await getProductsDetails(params.id);
+  console.log(product, "product");
   if (!product)
     return {
       title: "Not Found",
@@ -60,7 +62,7 @@ const ProductDetailsPage = async ({ params }) => {
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.API_URL}/api/products`);
   const datas = await res.json();
-  const trimData = datas.slice(0, 20);
+  const trimData = datas?.products?.slice(0, 20);
   return trimData.map((data) => ({
     id: data.id.toString(),
   }));

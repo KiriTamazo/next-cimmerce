@@ -6,7 +6,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ["var(--font-roboto)"],
+        montserrat: ["var(--font-montserrat)"],
+      },
+    },
   },
   plugins: [],
 };

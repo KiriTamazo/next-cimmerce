@@ -1,7 +1,6 @@
 import nc from "next-connect";
 import {
   createProduct,
-  getProduct,
   getProducts,
 } from "@/backend/controller/product.controller";
 import dbConnect from "@/backend/config/dbConnect";

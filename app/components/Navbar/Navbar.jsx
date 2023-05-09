@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 mr-5">
             <a href="/">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 height="40"
                 width="120"
                 alt="BuyItNow"

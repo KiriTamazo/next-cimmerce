@@ -54,11 +54,11 @@ const Pagination = ({ resPerPage, totalPage, filterProductsCount }) => {
         pageClassName="hover:bg-gray-200 "
         className="flex justify-center gap-2 h-fit"
         pageLinkClassName="inline-flex w-10 h-10 text-sm font-semibold border border-gray-300  items-center  justify-center rounded cursor-pointer"
-        activeClassName=" w-10 h-10 hover:bg-indigo-600 bg-indigo-500 text-sm font-medium text-white h-fit rounded z-10"
-        nextClassName="bg-indigo-500 hover:bg-indigo-600 text-white border flex items-center justify-center w-10 h-10  text-sm font-medium text-indigo-600 h-auto rounded"
-        previousClassName="bg-indigo-500 hover:bg-indigo-600 text-white border flex items-center justify-center w-10 h-10  text-sm font-medium text-indigo-600 h-auto rounded"
-        previousLinkClassName="w-full h-full flex items-center justify-center cursor-pointer"
-        nextLinkClassName="w-full h-full flex items-center justify-center cursor-pointer"
+        activeClassName=" hover:bg-indigo-500 bg-indigo-600 text-white  rounded z-10"
+        nextClassName="pagination-list"
+        previousClassName="pagination-list"
+        previousLinkClassName="pagination-link"
+        nextLinkClassName="pagination-link"
       />
     </div>
   );

@@ -12,28 +12,22 @@ export const createProduct = async (req, res, next) => {
 export const getProducts = async (req, res, next) => {
   try {
     const query = req.query;
-    const resPerPage = 2;
+    const resPerPage = 3;
     // Filter/Sorting Products
     const filters = apiFilters(productModel.find(), query);
-    const results = await filters
-      .search()
-      .filter()
-      .pagination(resPerPage)
-      .exec();
+    const results = await filters.search().filter().pagination().exec();
     // Pagination
+    console.log("-----result-------");
     const productCount = await productModel.countDocuments();
-    // Functional filter
 
-    const filterProductsCount = results.length;
-
-    const totalPage = Math.ceil(productCount / filterProductsCount);
+    const totalPage = Math.ceil(productCount / results.length);
 
     const metadata = {
       resPerPage,
       totalPage,
-      filterProductsCount,
+      productCount,
     };
-    res.status(200).json({ products: results, metadata });
+    // res.status(200).json({ products: results, metadata });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

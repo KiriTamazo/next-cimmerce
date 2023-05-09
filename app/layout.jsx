@@ -1,6 +1,18 @@
 import Navbar from "./components/Navbar/Navbar";
 import ProgressBar from "./components/Navbar/ProgressBar";
 import "./globals.css";
+import { Montserrat, Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+const montserrat = Montserrat({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -10,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${montserrat.variable} ${roboto.variable} font-roboto`}>
         <ProgressBar />
         <Navbar />
 

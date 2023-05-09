@@ -1,6 +1,8 @@
 import Filters from "../components/Products/Filter";
 import ProductItems from "../components/Products/ProductItems";
 import Pagination from "../components/Pagination";
+import { Suspense } from "react";
+import PageLoading from "./loading";
 
 const ProductsList = async ({ products, metadata }) => {
   return (
@@ -11,7 +13,9 @@ const ProductsList = async ({ products, metadata }) => {
           <main className="md:w-2/3 lg:w-3/4 px-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
               {products?.map((product, i) => (
-                <ProductItems key={product.id} product={product} />
+                <Suspense key={product.id} fallback={<div>Loading...</div>}>
+                  <ProductItems key={product.id} product={product} />
+                </Suspense>
               ))}
             </div>
             <Pagination {...metadata} />
