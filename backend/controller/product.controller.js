@@ -15,19 +15,21 @@ export const getProducts = async (req, res, next) => {
     const resPerPage = 3;
     // Filter/Sorting Products
     const filters = apiFilters(productModel.find(), query);
-    const results = await filters.search().filter().pagination().exec();
-    // Pagination
-    console.log("-----result-------");
-    const productCount = await productModel.countDocuments();
-
-    const totalPage = Math.ceil(productCount / results.length);
+    const results = await filters
+      .search()
+      .filter()
+      .pagination(resPerPage)
+      .exec();
+    // For Pagination
+    const productCount = await filters.count(); //total products in the DB (before filter or after filter)
+    const totalPage = Math.ceil(productCount / resPerPage);
 
     const metadata = {
       resPerPage,
       totalPage,
       productCount,
     };
-    // res.status(200).json({ products: results, metadata });
+    res.status(200).json({ products: results, metadata });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

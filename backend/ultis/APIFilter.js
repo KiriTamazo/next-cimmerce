@@ -4,7 +4,7 @@ export function apiFilters(query, queryStr) {
       ? { name: { $regex: queryStr.search, $options: "i" } }
       : {};
     query = query.find({ ...searchParams });
-    return apiFilters(query, queryStr); // return updated apiFilters object
+    return apiFilters(query, queryStr);
   };
   const filter = () => {
     const queryClone = { ...queryStr };
@@ -37,15 +37,20 @@ export function apiFilters(query, queryStr) {
     const currentPage = Number(queryStr.page) || 1;
     const skip = resPerPage * (currentPage - 1);
 
-    console.log(query, "pagiantion  uqerty");
     query = query.limit(resPerPage).skip(skip);
     return apiFilters(query, queryStr);
+  };
+  const count = async () => {
+    const countQuery = query.model.countDocuments(query.getFilter());
+    const count = await countQuery.exec();
+    return count;
   };
 
   return {
     search,
     filter,
     pagination: (val) => pagination(val),
-    exec: () => query.exec(), // add an exec function to execute the query
+    count,
+    exec: () => query.exec(),
   };
 }

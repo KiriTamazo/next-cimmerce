@@ -1,7 +1,9 @@
 "use client";
 import NoSsr from "@/ulti/NoSsr";
+import getPriceQueryParams from "@/ulti/getPriceQueryParams";
+import orderParams from "@/ulti/orderParams";
 import { useRouter } from "next/navigation";
-import { Suspense } from "react";
+import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 const Checkbox = ({ name, value, label, handleClick, checkHandler }) => {
@@ -23,6 +25,9 @@ const Checkbox = ({ name, value, label, handleClick, checkHandler }) => {
 };
 
 const Filters = () => {
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
+
   let queryParams;
   const router = useRouter();
   const handleClick = (checkbox) => {
@@ -47,7 +52,9 @@ const Filters = () => {
       }
     }
 
-    const path = window.location.pathname + "?" + queryParams.toString();
+    const query = orderParams(queryParams);
+    const path = `${window.location.pathname}?${query}`;
+
     router.push(path);
   };
 
@@ -58,6 +65,18 @@ const Filters = () => {
       if (checkBoxValue === value) return true;
 
       return false;
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (typeof window !== "undefined") {
+      queryParams = new URLSearchParams(window.location.search);
+      queryParams = getPriceQueryParams(queryParams, "min", min);
+      queryParams = getPriceQueryParams(queryParams, "max", max);
+      const query = orderParams(queryParams);
+
+      const path = `${window.location.pathname}?${query}`;
+      router.push(path);
     }
   };
 
@@ -83,20 +102,27 @@ const Filters = () => {
               type="number"
               placeholder="Min"
               min={0}
+              value={min}
+              onChange={(e) => setMin(e.target.value)}
             />
           </div>
           <div className="mb-4">
             <input
               name="max"
               min={0}
+              value={max}
+              onChange={(e) => setMax(e.target.value)}
               className="min-max-input"
               type="number"
               placeholder="Max"
             />
           </div>
           <div className="mb-4">
-            <button className="px-1 py-2 text-center w-full inline-block text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700">
-              Go
+            <button
+              onClick={handleButtonClick}
+              className="px-1 py-2 text-center w-full inline-block text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700"
+            >
+              Find
             </button>
           </div>
         </div>

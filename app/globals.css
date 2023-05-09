@@ -22,6 +22,6 @@
     @apply w-full h-full flex items-center justify-center cursor-pointer;
   }
   .min-max-input {
-    @apply [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-slate-100 rounded-md py-2 px-3 focus:outline-none focus:border-indigo-500 border  w-full;
+    @apply [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-slate-100 rounded-md py-2 px-3 focus:outline-none  border-transparent border focus:border-indigo-500   w-full;
   }
 }

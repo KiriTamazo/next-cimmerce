@@ -1,5 +1,6 @@
 "use client";
 
+import orderParams from "@/ulti/orderParams";
 import {
   faChevronLeft,
   faChevronRight,
@@ -28,18 +29,18 @@ const Pagination = ({ resPerPage, totalPage, filterProductsCount }) => {
         queryParams.set("page", current + 1);
       } else {
         // To Reset the ui and url not being match cuz Pagination currentPage 0 is equal to Ui 1
-        queryParams.set("page", current === 0 ? current + 1 : current + 2);
+        queryParams.set("page", current === 0 ? current : current + 1);
       }
-      // To remove ?search after searching and return to / path
-      const query = queryParams.toString();
-      const pagePath = query.slice(queryParams.toString().indexOf("page"));
+      // for page query to be the last part of url
+      const query = orderParams(queryParams);
+      // Url to not show Page=1
+      const queryPath = current > 0 ? query : "";
 
-      const path = window.location.pathname + "?" + pagePath;
+      const path = `${window.location.pathname}?${queryPath}`;
 
       router.push(path);
     }
   };
-
   return (
     <div className="flex h-fit mt-10 justify-center">
       <ReactPaginate
